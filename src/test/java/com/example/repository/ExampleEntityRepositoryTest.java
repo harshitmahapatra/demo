@@ -64,6 +64,22 @@ public class ExampleEntityRepositoryTest {
 
     }
 
+    //This works
+    @Test
+    public void testJSONFieldReadFromFile() throws Exception {
+        UUID userId = UUID.randomUUID();
+        String jsonString = new String(Files.readAllBytes(Paths.get(ClassLoader.getSystemResource("testSimpleFields.json").toURI())));
+        Map<String, String> rawData = objectMapper.readerFor(Map.class).readValue(jsonString);
+        exampleEntityRepository.save(ExampleEntity.builder()
+                .userId(userId)
+                .rawData(rawData)
+                .build());
+
+        assertThat(exampleEntityRepository.count()).isEqualTo(1);
+        assertThat(exampleEntityRepository.findAll().iterator().next().getUserId()).isEqualTo(userId);
+
+    }
+
     //This does not work
     @Test
     public void testJSONFieldReadWithJSONArrayFieldTypeFromFile() throws Exception {
