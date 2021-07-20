@@ -1,0 +1,12 @@
+{
+  "type": "stepCount",
+  "stepCount": 29,
+  "dataSources": [
+    {
+      "identifier": "189db1e7",
+      "deviceType": 3,
+      "manufacturer": "Compal",
+      "model": "Fossil Sport"
+    }
+  ]
+}
